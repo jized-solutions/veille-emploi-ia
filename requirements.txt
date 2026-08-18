@@ -1,0 +1,2 @@
+# Aucune dépendance externe pour la première acquisition.
+# Le script utilise uniquement la bibliothèque standard de Python.

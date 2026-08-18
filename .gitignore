@@ -1,0 +1,38 @@
+# Secrets et configuration strictement locale
+.env
+.env.*
+!.env.example
+
+# Environnements et fichiers Python temporaires
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Données de travail : captures, base locale et journaux
+data/
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.log
+
+# Captures locales hors du répertoire data
+capture/
+captures/
+
+# Rapports générés localement
+reports/
+
+# Outils et système
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

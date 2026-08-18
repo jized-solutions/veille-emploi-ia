@@ -1,0 +1,44 @@
+{
+  "version": "targeted-v2",
+  "profiles": [
+    {
+      "id": "coordination_exploitation",
+      "label": "Coordination et exploitation de site ou de services",
+      "horizon": "accessible_maintenant",
+      "queries": [
+        "responsable exploitation",
+        "responsable de site industriel",
+        "chargé exploitation"
+      ]
+    },
+    {
+      "id": "support_technique_sav",
+      "label": "Support technique, SAV et clients professionnels",
+      "horizon": "accessible_maintenant",
+      "queries": [
+        "support technique clients",
+        "technicien support N1",
+        "technicien SAV"
+      ]
+    },
+    {
+      "id": "achats_approvisionnement",
+      "label": "Achats, approvisionnement et fournisseurs industriels",
+      "horizon": "accessible_maintenant",
+      "queries": [
+        "approvisionneur industriel",
+        "acheteur industriel"
+      ]
+    },
+    {
+      "id": "services_techniques_evolution",
+      "label": "Coordination de maintenance et centre de service technique",
+      "horizon": "evolution",
+      "queries": [
+        "coordinateur maintenance",
+        "responsable service technique",
+        "responsable centre véhicules industriels"
+      ]
+    }
+  ]
+}
