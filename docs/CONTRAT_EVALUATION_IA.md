@@ -153,6 +153,28 @@ renseigné », jamais « compétence absente ».
 }
 ```
 
+### Canonicalisation et intégrité
+
+Pour tous les hashes définis par ce contrat, le JSON canonique est encodé en
+UTF-8, avec les clés d'objets triées, les caractères Unicode conservés sans
+conversion obligatoire en séquences ASCII, l'ordre des tableaux conservé et
+des séparateurs JSON compacts. Il ne contient aucun espace ni aucune
+indentation non significative.
+
+`input_payload_sha256` est le SHA-256 des octets UTF-8 du JSON canonique de
+l'entrée finalisée après retrait du seul champ
+`integrity.input_payload_sha256`. Ce champ doit être retiré de l'objet avant la
+canonicalisation ; il ne doit être remplacé ni par `null`, ni par une chaîne
+vide, ni par une valeur temporaire. Tous les autres champs présents dans
+l'entrée finalisée participent au calcul, notamment `schema_version`,
+`artifact_type`, la provenance, la politique, le profil, la sélection, les
+opportunités et les autres hashes du bloc `integrity`.
+
+La validation doit appliquer exactement la même transformation : retirer le
+seul champ `integrity.input_payload_sha256`, canonicaliser l'objet résultant
+selon les règles précédentes, recalculer le SHA-256 puis le comparer à la valeur
+stockée.
+
 La préparation sélectionne `KEEP` et `REVIEW`, puis les représentants stockés
 des quasi-doublons. Elle calcule les comptes depuis les données. Elle ne possède
 aucun argument permettant de lire le jeu manuel.
