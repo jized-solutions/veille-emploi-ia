@@ -1,7 +1,8 @@
-# État du projet — 17 août 2026
+# État du projet — 19 août 2026
 
-Ce document décrit l'état connu au dernier échange dans ChatGPT Work Cloud. Il
-ne remplace pas une vérification du disque local au moment de la reprise.
+Ce document décrit l'état vérifié dans le projet Codex local au 19 août 2026.
+Il ne remplace pas une nouvelle vérification du disque local lors d'une reprise
+ultérieure.
 
 ## État confirmé
 
@@ -67,33 +68,50 @@ envoyée.
 - Le générateur de rapports ignore désormais les anciens trajets rattachés à
   des offres devenues EXCLUDE et affiche « Non calculé (offre exclue) ».
 
-## Point précis à vérifier à la reprise
+## Checkpoint de validation manuelle — 19 août 2026
 
-Le rapport local le plus récent connu a été créé avant la dernière correction
-d'affichage des trajets :
+Le dernier rapport validé est :
 
-`reports\html\rapport_capture_2_2026-08-17_113521Z.html`
+`reports\html\rapport_capture_2_2026-08-17_114131Z.html`
 
-Après installation des fichiers corrigés, exécuter de nouveau :
+Il contient 29 offres :
 
-```powershell
-python .\app\generate_reports.py --capture-id 2
-```
+- 5 KEEP ;
+- 12 REVIEW ;
+- 12 EXCLUDE.
 
-Le résumé attendu pour les offres encore KEEP ou REVIEW est :
+Pour les offres KEEP ou REVIEW, le résumé des trajets est :
 
-- 13 trajets à 35 minutes ou moins ;
-- 3 trajets entre 35 et 60 minutes ;
-- 0 trajet au-delà de 60 minutes ;
-- 1 trajet inconnu.
+- 13 à 35 minutes ou moins ;
+- 3 entre 35 et 60 minutes ;
+- 0 au-delà de 60 minutes ;
+- 1 inconnu.
 
-Ces chiffres sont un résultat de test attendu, pas une décision métier. S'ils
-diffèrent, diagnostiquer la base locale en lecture seule avant de modifier le
-code ou les données.
+Les 17 offres KEEP ou REVIEW représentent 15 opportunités uniques après le
+regroupement des quasi-doublons. Le classement manuel validé est :
+
+- 0 `credible` ;
+- 6 `audacious` ;
+- 4 `evolution` ;
+- 5 `out_of_scope`.
+
+Ces catégories manuelles ne remplacent ni ne modifient les verdicts mécaniques.
+Une exclusion concerne l'offre précise évaluée et n'exclut pas automatiquement
+son secteur d'activité pour d'autres fonctions compatibles.
+
+Le profil professionnel validé et le jeu de référence manuel sont conservés
+uniquement dans les fichiers locaux suivants :
+
+- `data/profil_professionnel.md` ;
+- `data/evaluations/capture_2_manual.json`.
+
+Ces fichiers restent ignorés par Git et leur contenu ne doit pas être recopié
+dans les fichiers suivis.
 
 ## État de l'architecture
 
-Checkpoint après première source réelle et premier pipeline complet :
+Checkpoint après première source réelle, pipeline complet et validation
+manuelle du jeu de référence :
 
 ✅ **CONSERVER L'ARCHITECTURE**
 
@@ -102,19 +120,18 @@ La stack actuelle reste adaptée pour valider rapidement le concept. GitHub sert
 base SQLite, ni les captures, ni les rapports. Un projet Codex local attaché au
 dossier officiel devient l'environnement de modification et de test.
 
-## Prochaine séquence recommandée
+## Prochain jalon
 
-1. Vérifier en lecture seule le dossier local, les fichiers, Git et la présence
-   des données nécessaires.
-2. Installer ou remplacer uniquement les fichiers de code et documentation du
-   paquet de transition ; préserver `.env`, `data` et `reports`.
-3. Régénérer le rapport corrigé de la capture #2 et comparer aux valeurs
-   attendues ci-dessus.
-4. Relire manuellement les 17 offres KEEP/REVIEW pour évaluer la qualité des
-   profils de recherche et des règles mécaniques.
-5. Formaliser le profil professionnel de Julien à partir d'une source validée
-   (CV et préférences), puis seulement concevoir un petit test d'évaluation IA.
-6. Refaire un checkpoint avant toute automatisation quotidienne.
+Concevoir un premier classement IA en mode strictement comparatif. Il devra :
+
+1. lire le résultat des filtres mécaniques sans le remplacer ;
+2. produire une proposition distincte, comparable au jeu de référence manuel ;
+3. rendre visibles les accords, désaccords et informations manquantes ;
+4. ne jamais modifier les verdicts mécaniques ou manuels ;
+5. ne jamais se substituer à une décision utilisateur.
+
+Le résultat devra être évalué sur le petit jeu de référence local avant tout
+élargissement, automatisation ou intégration au pipeline principal.
 
 Ne pas ajouter de nouvelle source, d'agent autonome ou de candidature automatique
 à ce stade.
