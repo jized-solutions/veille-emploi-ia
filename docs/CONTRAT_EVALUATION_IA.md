@@ -324,11 +324,17 @@ Le validateur recalcule cet identifiant. Toute collision ou duplication fait
 
 - `education` ;
 - `licence_or_authorization` ;
+- `certification` ;
 - `skill` ;
 - `experience` ;
 - `responsibility` ;
 - `working_condition` ;
 - `other`.
+
+`other` est réservé à une catégorie résiduelle explicitement prévue par le
+schéma source et qui ne relève d'aucune nature plus précise ci-dessus. Il ne
+sert jamais de valeur de repli pour une nature inconnue ou non reconnue, ni
+pour une certification. Toute nature non reconnue fait échouer la préparation.
 
 `label` conserve le libellé source sans en changer la catégorie. `source_code`
 conserve le code métier éventuel de l'élément source et vaut `null` en son
